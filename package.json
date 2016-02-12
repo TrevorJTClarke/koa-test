@@ -1,0 +1,19 @@
+{
+  "name": "koa-test",
+  "version": "0.0.1",
+  "description": "Testing koa and its awesome multi promise REST capabilities",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa",
+    "nodejs",
+    "es6",
+    "trevorjtclarke",
+    "co",
+    "testing"
+  ],
+  "author": "@trevorjtclarke",
+  "license": "MIT"
+}
