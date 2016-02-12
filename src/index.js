@@ -1,8 +1,19 @@
-var koa = require('koa');
-var app = koa();
+'use strict';
+// require('dotenv').config(); // Load env vars from .env, always run this early
+const koa = require('koa')
+const config = require('./config')
+const app = koa();
 
+// heroku stuff
+app.poweredBy = false;
+// app.proxy = config.TRUST_PROXY;
+
+
+
+
+
+// TODO: Remove, these are just examples from koa
 // x-response-time
-
 app.use(function *(next){
   var start = new Date;
   yield next;
@@ -11,7 +22,6 @@ app.use(function *(next){
 });
 
 // logger
-
 app.use(function *(next){
   var start = new Date;
   yield next;
@@ -20,9 +30,16 @@ app.use(function *(next){
 });
 
 // response
-
 app.use(function *(){
   this.body = 'Hello World';
 });
 
-app.listen(3000);
+app.listen(config.PORT, () => {
+  let serverEndpoint = (config.NODE_ENV == 'development') ? `http://localhost:${config.PORT}`: `${config.NODE_ENV} on ${config.PORT}`
+  console.log(`
+  ---------------------------
+  ~~~~~~~~~~~~KOA~~~~~~~~~~~~
+  ---------------------------
+  ${serverEndpoint}
+  `);
+});

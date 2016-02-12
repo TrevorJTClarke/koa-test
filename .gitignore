@@ -1,3 +1,5 @@
 *.badideas
 *.log
 node_modules
+
+.env
