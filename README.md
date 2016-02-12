@@ -7,7 +7,13 @@ Loosely based on the findings by [@danneu](https://github.com/danneu/koa-skeleto
 
 ### Setup
 
-TODO:
+*NOTE: Make sure you have nodejs version 4+!*
+
+Run the quick install
+
+`npm install`
+
+TODO: finish
 
 ### Configuration
 
