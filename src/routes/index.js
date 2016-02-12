@@ -16,5 +16,13 @@ router.get('/system', function*() {
   }
 })
 
+// simple route for environment checking
+router.get('/db-overview', function*() {
+  // TODO: error handling
+  // TODO: unit test
+  // TODO: db connection
+  this.body = Object.assign.apply(null, yield [{ type: 'Postgres' }, { title: 'koa' }])
+})
+
 
 module.exports = router;
