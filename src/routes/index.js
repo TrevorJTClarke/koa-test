@@ -2,6 +2,7 @@
 
 const Routes = require('koa-router');
 const config = require('../config');
+const db = require('../db');
 const router = new Routes();
 
 
@@ -18,10 +19,13 @@ router.get('/system', function*() {
 
 // simple route for environment checking
 router.get('/db-overview', function*() {
-  // TODO: error handling
+  let database = { spec: {} }
   // TODO: unit test
-  // TODO: db connection
-  this.body = Object.assign.apply(null, yield [{ type: 'Postgres' }, { title: 'koa' }])
+  database.spec = yield db.getDbInfo()
+  // database.spec = Object.assign.apply(null, yield db.getDbInfo())
+  console.log('database', database);
+
+  this.body = database
 })
 
 

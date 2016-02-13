@@ -8,6 +8,15 @@ const app = koa();
 app.poweredBy = false;
 // app.proxy = config.TRUST_PROXY;
 
+// TODO: possible error handler
+// app.use(function* errorHandler(next) {
+//   try {
+//     // catch all downstream errors
+//     yield next;
+//   } catch (err) {
+//     // do something with the error
+//   }
+// })
 
 
 // Load all routes
