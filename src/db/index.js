@@ -9,7 +9,7 @@ const db = require('./utils');
  */
 exports.getDbInfo = function*() {
 
-  // NOTE: creates a table and field values
+  // // NOTE: creates a table and field values
   // let sql = `
   //   CREATE TABLE koadb(
   //     id SERIAL PRIMARY KEY,
@@ -19,15 +19,15 @@ exports.getDbInfo = function*() {
   //   )
   // `
 
-  // // NOTE: adds item to table
-  // let sql = `
-  //   INSERT INTO koadb VALUES (0, 'some type', 'some title', true);
-  // `
-
-  // NOTE: reads all items from table
+  // NOTE: adds item to table
   let sql = `
-    SELECT * FROM koadb;
+    INSERT INTO koadb VALUES (0, 'some type', 'some title', true);
   `
+
+  // // NOTE: reads all items from table
+  // let sql = `
+  //   SELECT * FROM koadb;
+  // `
 
   // // NOTE: reads one item from table
   // let sql = `
