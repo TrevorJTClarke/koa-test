@@ -3,7 +3,6 @@
 const Routes = require('koa-router');
 const config = require('../config');
 const db = require('../db');
-const admin = require('./admin');
 const router = new Routes();
 
 

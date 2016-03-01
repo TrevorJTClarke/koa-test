@@ -2,21 +2,12 @@
 
 const config = require('../config');
 const db = require('./utils');
-const Admin = require('./utils');
-
-
-
-
-/**
- * Admin
- */
-exports.Admin = Admin
 
 
 /**
  * Db Testing!
  */
-exports.getDbInfo = function*() {
+exports.createTables = function*() {
 
   // NOTE: creates a table and field values
   // let sql = `
