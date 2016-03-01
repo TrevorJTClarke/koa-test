@@ -7,13 +7,19 @@ const Routes = require('koa-router');
 const config = require('../config');
 const db = require('../db');
 const router = new Routes();
-console.log('db', db);
-
 
 // setup all the tables inside the DB
 // NOTE: DANGEROUS
-router.get('/tables/init', function*() {
-  this.body = { message: 'done' }
+router.get('/tables', function*() {
+  let sql = `
+    SELECT table_name
+      FROM information_schema.tables
+    WHERE table_schema='public'
+      AND table_type='BASE TABLE';
+    `;
+  let res = yield db.query(sql)
+
+  this.body = res.rows
 })
 
 // // simple route for environment checking

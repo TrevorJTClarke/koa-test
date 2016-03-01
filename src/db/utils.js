@@ -1,9 +1,7 @@
 'use strict';
 
 const pg = require('co-pg')(require('pg'));
-
 const config = require('../config');
-
 
 /**
  * Helpers
@@ -16,7 +14,6 @@ pg.types.setTypeParser(1700, val => val === null ? null : Number.parseFloat(val)
 /**
  * Queries
  */
-exports.query = query;
 function* query(sql, params) {
   const connResult = yield pg.connectPromise(config.DATABASE_URL)
   const client = connResult[0]
@@ -29,8 +26,13 @@ function* query(sql, params) {
   }
 }
 
-exports.queryOne = queryOne;
 function* queryOne(sql, params) {
   const result = yield query(sql, params);
   return result.rows[0]
+}
+
+
+module.exports = {
+  query,
+  queryOne
 }

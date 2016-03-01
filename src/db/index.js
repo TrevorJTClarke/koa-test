@@ -1,22 +1,20 @@
 'use strict';
 
 const config = require('../config');
-const db = require('./utils');
-const Admin = require('./utils');
-
-
+const DB = require('./utils');
+// const Admin = require('./utils');
 
 
 /**
  * Admin
  */
-exports.Admin = Admin
+// exports.Admin = Admin
 
 
 /**
  * Db Testing!
  */
-exports.getDbInfo = function*() {
+DB.getDbInfo = function*() {
 
   // // NOTE: creates a table and field values
   // let sql = `
@@ -60,3 +58,5 @@ exports.getDbInfo = function*() {
   return data.rows
   // return data
 }
+
+module.exports = DB
