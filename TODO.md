@@ -1,12 +1,12 @@
 ## TODO
 
   - [ ] Sessions
-    - [ ] Token Model
+    - [ ] Token Model (sqls)
     - [ ] store password
     - [ ] validate Token
     - [ ] create Token
     - [ ] delete Token
-  - [ ] User Model
+  - [ ] Crud Model
     - [ ] Create
     - [ ] Read
     - [ ] Update

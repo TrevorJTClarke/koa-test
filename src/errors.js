@@ -2,7 +2,7 @@
 
 module.exports = {
 
-  errorHandler: function* (next) {
+  handler: function* (next) {
     try {
       // catch all downstream errors
       yield next;
