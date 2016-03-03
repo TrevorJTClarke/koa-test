@@ -4,7 +4,6 @@ const koa = require('koa')
 const config = require('./config')
 const utils = require('./utils')
 const app = koa();
-// console.log('utils', utils);
 
 // heroku stuff
 app.poweredBy = false;
