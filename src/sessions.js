@@ -1,6 +1,7 @@
 'use strict';
 
 const config = require('./config')
+const jwt = require('koa-jwt')
 
 /**
  * sessionHandler
@@ -19,8 +20,11 @@ function *handler(next) {
     }
   }
 
-  // TODO:
-  // validate token authentication
+  // TODO: finish
+  // validate jwt token
+  let ctx = (_this.headers.authorization && _this.headers.authorization.search('Bearer ') > -1)? _this.headers.authorization.split(' ')[1] : null
+  // jwt.verify(ctx)
+  console.log("TODO: jwt.verify",ctx)
 
   if(error) {
     // Error handle
@@ -31,4 +35,13 @@ function *handler(next) {
   }
 }
 
-module.exports = { handler }
+function *authorize(data) {
+  let token = jwt.sign({ payload: data }, config.JWT, { expiresIn: '7d', })
+  // Finish
+  return { token }
+}
+
+module.exports = {
+  handler,
+  authorize
+}

@@ -1,6 +1,7 @@
 'use strict';
 require('dotenv').config(); // Load env vars from .env, always run this early
 const koa = require('koa')
+const jwt = require('koa-jwt')
 const config = require('./config')
 const errors = require('./errors')
 const sessions = require('./sessions')
@@ -12,6 +13,9 @@ app.poweredBy = false;
 
 // error handler
 app.use(errors.handler)
+
+// JWT Support
+app.use(jwt({ secret: config.JWT, passthrough: true }))
 
 // session handler
 app.use(sessions.handler)
