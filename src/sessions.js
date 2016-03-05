@@ -54,13 +54,13 @@ function *authorize(data) {
 //   email: email,
 //   mask: hashofpassword
 // }
-function *authenticate(data) {
+function* authenticate(data, next) {
+  console.log("HEREddd")
   // TODO: Setup verificaiton
   // apply this immediately
   let salt = yield bcrypt.genSalt(config.SALT_AMOUNT)
   let hash = yield bcrypt.hash(data.mask, salt)
   let emMd5 = md5(data.email)
-  console.log("hash, emMd5",hash, emMd5)
 
   // setup the sql to store the
   let sql = `
@@ -71,7 +71,9 @@ function *authenticate(data) {
 
   // Store the encrypted string into db?
   // wait until the query is done
+  // TODO: Return validated token and user object
   return yield* db.query(sql)
+  // yield* next
 }
 
 module.exports = {
