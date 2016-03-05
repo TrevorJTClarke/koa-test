@@ -1,7 +1,10 @@
 'use strict';
 
 const config = require('./config')
+const db = require('./db')
 const jwt = require('koa-jwt')
+const bcrypt = require('co-bcrypt')
+const md5 = require('md5')
 
 /**
  * sessionHandler
@@ -21,6 +24,7 @@ function *handler(next) {
   }
 
   // TODO: finish
+  //  - change to live in the cookie?
   // validate jwt token
   let ctx = (_this.headers.authorization && _this.headers.authorization.search('Bearer ') > -1)? _this.headers.authorization.split(' ')[1] : null
   // jwt.verify(ctx)
@@ -41,7 +45,34 @@ function *authorize(data) {
   return { token }
 }
 
+// TODO: finish
+// Create an encrypted string for a set of data
+// - md5 email?
+//
+// {
+//   id: userId,
+//   email: email,
+//   mask: hashofpassword
+// }
+function *authenticate(data) {
+  // apply this immediately
+  let salt = yield* bcrypt.genSalt(config.SALT_AMOUNT)
+  let hash = yield* bcrypt.hash('B4c0/\/', salt)
+  let emMd5 = md5(data.email)
+
+  // setup the sql to store the
+  let sql = `
+    INSERT INTO masks (user_id, email, mask)
+      VALUES (${data.id}, '${emMd5}', '${hash}')
+      ON CONFLICT (user_id) DO UPDATE SET email = EXCLUDED.email, mask = EXCLUDED.mask;
+  `
+
+  // Store the encrypted string into db?
+  return yield db.query(sql)
+}
+
 module.exports = {
   handler,
-  authorize
+  authorize,
+  authenticate
 }

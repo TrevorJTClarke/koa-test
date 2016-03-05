@@ -3,9 +3,9 @@
 /**
  * Admin Functions, these should only be exposed to the owner of the server
  */
-const Routes = require('koa-router');
-const db = require('../db');
-const router = new Routes();
+const Routes = require('koa-router')
+const db = require('../db')
+const router = new Routes()
 
 // return all the table names inside the DB
 // NOTE: DANGEROUS

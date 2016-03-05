@@ -1,9 +1,9 @@
 'use strict';
 
-const Routes = require('koa-router');
-const config = require('../config');
-const db = require('../db');
-const router = new Routes();
+const Routes = require('koa-router')
+const config = require('../config')
+const db = require('../db')
+const router = new Routes()
 
 // simple route for environment checking
 router.get('/system', function*() {

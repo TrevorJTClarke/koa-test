@@ -40,3 +40,15 @@ CREATE VIEW active_sessions AS
   FROM sessions
   WHERE expired_at > NOW()
 ;
+
+------------------------------------------------------------
+------------------------------------------------------------
+
+CREATE TABLE masks (
+  user_id       int PRIMARY KEY NOT NULL REFERENCES users(id),
+  email         text NOT NULL,
+  mask          text NOT NULL
+);
+
+-- Speed up user_id FK joins
+CREATE INDEX masks__user_id ON masks (user_id);
