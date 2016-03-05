@@ -55,20 +55,23 @@ function *authorize(data) {
 //   mask: hashofpassword
 // }
 function *authenticate(data) {
+  // TODO: Setup verificaiton
   // apply this immediately
-  let salt = yield* bcrypt.genSalt(config.SALT_AMOUNT)
-  let hash = yield* bcrypt.hash('B4c0/\/', salt)
+  let salt = yield bcrypt.genSalt(config.SALT_AMOUNT)
+  let hash = yield bcrypt.hash(data.mask, salt)
   let emMd5 = md5(data.email)
+  console.log("hash, emMd5",hash, emMd5)
 
   // setup the sql to store the
   let sql = `
     INSERT INTO masks (user_id, email, mask)
       VALUES (${data.id}, '${emMd5}', '${hash}')
       ON CONFLICT (user_id) DO UPDATE SET email = EXCLUDED.email, mask = EXCLUDED.mask;
-  `
+  `;
 
   // Store the encrypted string into db?
-  return yield db.query(sql)
+  // wait until the query is done
+  return yield* db.query(sql)
 }
 
 module.exports = {

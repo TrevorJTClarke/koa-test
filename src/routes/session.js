@@ -1,6 +1,6 @@
 'use strict';
 
-const parse = require('co-body')
+const body = require('co-body')
 const Routes = require('koa-router')
 const db = require('../db')
 const sessions = require('../sessions')
@@ -9,6 +9,11 @@ const router = new Routes()
 // TODO:
 // POST - create new authentication & session
 router.post('/register', function*() {
+  console.log("HERE!sdsds")
+  let data = yield body(this, { limit: '1kb' })
+  console.log("register data",data)
+  let test = yield sessions.authenticate(data)
+  console.log("HERE!", test)
   // let res = yield db.querySqlFile('get_tables_list')
   // this.body = res.rows
 })
@@ -16,7 +21,7 @@ router.post('/register', function*() {
 // TODO: finish
 // POST - login as new session
 router.post('/session', function*() {
-  let data = yield parse(this, { limit: '1kb' })
+  let data = yield body(this, { limit: '1kb' })
   // todo: validate and store
   this.body = yield* sessions.authorize(data)
 })

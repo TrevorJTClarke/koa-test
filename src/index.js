@@ -15,10 +15,12 @@ app.poweredBy = false;
 app.use(errors.handler)
 
 // JWT Support
-app.use(jwt({ secret: config.JWT, passthrough: true }))
+// app.use(jwt({ secret: config.JWT, passthrough: true })
+  // .unless({ path: [/^\/register/] })
+// )
 
 // session handler
-app.use(sessions.handler)
+// app.use(sessions.handler)
 
 // Load all routes
 app.use(require('./routes').routes());
